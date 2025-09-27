@@ -170,7 +170,7 @@ class HomeProvider extends ChangeNotifier {
         appCacheHelper.saveData(
             key: 'token',
             value:
-                'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJtYW5hcHB1cmFtIiwianRpIjoiNmMyMGYwMmMtMTIwYy00MDQxLWE1YmUtZmM5NTQ1ZTA2YWQ4IiwiaWF0IjoxNzU4OTU0NDgxLCJlbXBDb2RlIjoiNjAwNDkiLCJlbXBOYW1lIjoiUFJBVkVFTiBQIiwiam9pbkR0IjoiMDIvMTQvMjAxMSAwMDowMDowMCIsIm5iZiI6MTc1ODk1NDQ4MSwiZXhwIjoxNzU4OTU2MjgxfQ.U3Mq_PiZG1wzzm1NUP5JBVzoCeW5rj6R4koS_bib_wc');
+                'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJtYW5hcHB1cmFtIiwianRpIjoiZWI1ZDJiNmMtZDkxOC00ZTMxLWI3MzgtZDU0NTg1MjI4NTIxIiwiaWF0IjoxNzU4OTY2NzI2LCJlbXBDb2RlIjoiNjAwNDkiLCJlbXBOYW1lIjoiUFJBVkVFTiBQIiwiam9pbkR0IjoiMDIvMTQvMjAxMSAwMDowMDowMCIsIm5iZiI6MTc1ODk2NjcyNiwiZXhwIjoxNzU4OTY4NTI2fQ.iXbubEltue9NSH-ieTq2x0A4HpVR4qzCP6mB7NQu8pw');
         WidgetsBinding.instance.addPostFrameCallback((_) {
           context.goNamed(RoutesName.home);
         });

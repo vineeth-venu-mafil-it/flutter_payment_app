@@ -598,12 +598,13 @@ class PaymentOGLReportController extends ChangeNotifier {
   List<OglRptImpsResDt> impsResDet = [];
   List<OglRptneftSftDet> neftSftDet = [];
   List<OglRptSbiTransDet> SbiTransDet = [];
-
+  bool isLoadingCorId = false;
   Future<void> fetchCorId(
       {required BuildContext context, required String corId}) async {
     try {
       final response = await _api.fetchCorId(corId: corId);
-
+      isLoadingCorId = true;
+      notifyListeners();
       if (response != null && response['status'] == 200) {
         impsSendDtl = [];
         final items = (response['data']['response'][0]['imps_send_dtl'] as List)
@@ -627,6 +628,7 @@ class PaymentOGLReportController extends ChangeNotifier {
                 .map((item) => OglRptSbiTransDet.fromJson(item))
                 .toList();
         SbiTransDet = items3;
+        isLoadingCorId = false;
         notifyListeners();
       } else if (response != null && response['status'] == 500) {
         CustomToast.showCustomErrorToast(message: "${response['data']}");
@@ -653,6 +655,9 @@ class PaymentOGLReportController extends ChangeNotifier {
       if (kDebugMode) {
         print("Error: $e");
       }
+    } finally {
+      isLoadingCorId = false;
+      notifyListeners();
     }
   }
 
