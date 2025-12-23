@@ -26,7 +26,7 @@ import '../model/pay_rpt_neft_sft_det.dart';
 import '../model/pay_rpt_sbi_trans_det.dart';
 import '../model/pay_report_trans_det.dart';
 import '../model/pay_bank_model.dart';
-import '../repository/pay_ogl_report_repo.dart';
+import '../repository/pay_report_repo.dart';
 import '../model/branch_model.dart';
 
 class PayReportController extends ChangeNotifier {
@@ -495,8 +495,8 @@ class PayReportController extends ChangeNotifier {
 
       if (response != null && response['status'] == 200) {
         if (context.mounted) {
-          final value = response['data']['RES'][0]['ID_PROOF'];
-          if (value != null) {
+          if (response['data']['RES'].isNotEmpty) {
+            final value = response['data']['RES'][0]['ID_PROOF'];
             showDialog(
               barrierDismissible: false,
               context: context,
@@ -510,7 +510,7 @@ class PayReportController extends ChangeNotifier {
                       child: Column(
                         children: [
                           Image.memory(base64Decode(
-                              "${response['data']['RES'][0]['ID_PROOF']}"))
+                              "$value"))
                         ],
                       ),
                     ),
@@ -597,14 +597,14 @@ class PayReportController extends ChangeNotifier {
   List<PayRptImpsResDt> impsResDet = [];
   List<PayRptneftSftDet> neftSftDet = [];
   List<PayRptSbiTransDet> SbiTransDet = [];
-  bool isLoadingCorId=false;
+  bool isLoadingCorId = false;
 
   Future<void> fetchCorId(
       {required BuildContext context, required String corId}) async {
     try {
       final response = await _api.fetchCorId(corId: corId);
-isLoadingCorId=true;
-notifyListeners();
+      isLoadingCorId = true;
+      notifyListeners();
       if (response != null && response['status'] == 200) {
         impsSendDtl = [];
         final items = (response['data']['response'][0]['imps_send_dtl'] as List)
@@ -628,7 +628,7 @@ notifyListeners();
                 .map((item) => PayRptSbiTransDet.fromJson(item))
                 .toList();
         SbiTransDet = items3;
-        isLoadingCorId=false;
+        isLoadingCorId = false;
         notifyListeners();
       } else if (response != null && response['status'] == 500) {
         CustomToast.showCustomErrorToast(message: "${response['data']}");
@@ -655,8 +655,8 @@ notifyListeners();
       if (kDebugMode) {
         print("Error: $e");
       }
-    }finally{
-      isLoadingCorId=false;
+    } finally {
+      isLoadingCorId = false;
       notifyListeners();
     }
   }

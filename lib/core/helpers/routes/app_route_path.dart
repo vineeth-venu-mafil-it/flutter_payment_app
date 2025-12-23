@@ -20,4 +20,5 @@ class RoutesPath {
   static const String debitAdviseBlock = '/home/payments/debit_advise_block';
   static const String payOglReport = '/home/payments/payment_ogl_report';
   static const String payReport = '/home/payments/payment_report';
+  static const String payRejDebAdRept = '/home/payments/pay_rej_deb_ad_rpt';
 }

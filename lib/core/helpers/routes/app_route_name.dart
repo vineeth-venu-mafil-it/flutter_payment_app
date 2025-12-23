@@ -19,6 +19,7 @@ class RoutesName {
   static const String debitAdviseBlock = 'debit_advise_block';
   static const String payOglReport = 'payment_ogl_report';
   static const String payReport = 'payment_report';
+  static const String payRejDebAdRept = 'pay_rej_deb_ad_rpt';
 
 
 }

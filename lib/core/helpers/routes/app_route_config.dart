@@ -13,6 +13,7 @@ import '../../../features/payments/view/payments_page.dart';
 import '../../../features/payments/view/report/customer_neft_details/view/neft_details.dart';
 import '../../../features/payments/view/report/imps_inquiry/view/imps_inquiry.dart';
 import '../../../features/payments/view/report/imps_inquiry/view/imps_report/view/imps_report.dart';
+import '../../../features/payments/view/report/pay_rej_debit_advice_report/view/debit_advice.dart';
 import '../../../features/payments/view/report/pay_report/view/pay_report.dart';
 import '../../../features/payments/view/report/payment_status/view/payment_status.dart';
 import '../../../features/splash_screen/view/spalsh_screen.dart';
@@ -71,9 +72,9 @@ class AppRoutes {
           pageBuilder: (context, state) {
             final queryParams = state.uri.queryParameters;
             final curSession = queryParams['session'] ??
-                '05E408121A28051FA42040CA6FC5A4B630F07115213C3D5B67060332BB74DC533BF365FD938028970435DEFFF85216EA74CB1556C51751206A7481AF3072104C';
+                '05E408121A28051FA42040CA6FC5A4B630F07115213C3D5B67060332BB74DC533BF365FD938028970435DEFFF85216EA7B45E745E2D94B3FECAEE1A78E54C13D';
             final curToken = queryParams['token'] ??
-                '36696e3247414f6a7a624577375531484b61546958574468736637384f31657638526b4b4365616263734c72617a70694751756c63444f5652677469547a32714d4f7967497667755166744b4151365242663634774230396e433665696678374e593064376c674971313957794b37517753654676724770564a6478456e2b6763735747733371645633737574596f69457659746767722f55716a5663316d795956414a516566575a592f47506d78325835483344336b6b4a766a464c584530316a6f33565843772f58455957517275762f575544426f49774f446743464d795951754432734b50567155507235426f6c62486f55684d667134674b585538642b78494876595766424e38544835433370326e437268666f4e4b674e50784b3751537464416b77646378695a6558443458524d4f4774446c484b566d46776d2b452f46597755316d6853315a536b724979744f77746667706251714d2b76667556727a506f6b636562777945477838512b492b354e55344a706e6c612b5739797367474c6a4337374c634e6671772b6452574843797644594345633139685068636a636b33557a5037435a51566749583676344f79636d2f736d4e496e4f652b';
+                '36696e3247414f6a7a624577375531484b61546958574468736637384f31657638526b4b4365616263734c72617a70694751756c63444f5652677469547a32714d4f7967497667755166744b4151365242663634774f4e5552543673504d6153726751377146704449637672704e2f514e38743977346777303251744570597031615a356730564b73387835702b5947424f6d2b444b4e596174523269666d586b784762364e3559306f3464416435765953764250663769364147444232785a4555747a46727754335264574e76514770686a6f395462494552755a496d4b534a31525a7a555472646552344932712f656447614f6762357538714c4c6c302b68366835734d68724a6a6b376b445a56773933535343733935574d776d38397547314264325351673977766a7131386d5167444b677052724c74546271682f557a796b6f4b394b38783157542b50526f62355877656f75667a6e6266363646687069665a75584c706436746239566553596f4a627236496f536e4351782f6c58725341656b724e3532717a625038716d6b707a495533304c6450496876302b774c7941334f786e79664a7667615235485061304f4c374d56666a343644744472';
             return CustomTransitionPage<void>(
               key: state.pageKey,
               child: SplashScreen(
@@ -163,6 +164,26 @@ class AppRoutes {
                             child: const ChangeDebitAdviseBranch(),
                             transitionsBuilder: (context, animation,
                                     secondaryAnimation, child) =>
+                                FadeTransition(
+                                    opacity: animation, child: child),
+                          );
+                        },
+                      ),
+                      GoRoute(
+                        name: RoutesName.payRejDebAdRept,
+                        path: 'pay_rej_deb_ad_rpt',
+                        pageBuilder: (context, state) {
+                          Map<String, String> data = {
+                            "name": "payment rejection debit advise report",
+                            "path": "/home/payments/pay_rej_deb_ad_rpt"
+                          };
+                          _addBreadCrumbs(context, data);
+
+                          return CustomTransitionPage<void>(
+                            key: state.pageKey,
+                            child: const PayRejDebitAdviceReport(),
+                            transitionsBuilder: (context, animation,
+                                secondaryAnimation, child) =>
                                 FadeTransition(
                                     opacity: animation, child: child),
                           );
